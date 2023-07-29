@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Secure Car Refinance Application</title>
+	<title>Easy Car Refinance Application</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 	<meta name="description" content="Secure Car Refinance Application">
 	<meta name="author" content="Financial Examiner">

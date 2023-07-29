@@ -131,6 +131,11 @@ p {
   margin-bottom: 1rem;
 }
 
+.response-data {
+  color: #0a53be;
+  
+}
+
 abbr[title],
 abbr[data-bs-original-title] {
   -webkit-text-decoration: underline dotted;
