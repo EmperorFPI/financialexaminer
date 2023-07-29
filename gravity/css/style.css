@@ -132,8 +132,19 @@ p {
 }
 
 .response-data {
-  color: #0a53be;
+    color: #0068ff;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: #000 4px 9px 12px;
+    padding: 20px;
+    border-width: 1px;
+    border-color: #98bff7;
+    line-height: 1rem;
+}
   
+.response-data h2 {
+  color: #032353;
+  font-size: 1.5rem;
 }
 
 abbr[title],
