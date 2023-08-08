@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Search Cars</title>
+	<!-- # Main Style Sheet -->
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="carsearch">
+    <h2>Find Your Car</h2>
+  </div>
+  <div class="carsearch-form">
+ <form id="car-form" action="submit.php">
+  <label for="year_select">Select Year:</label>
+  <select id="year_select" name="year">
+    <option value="2022">2022</option>      
+    <option value="2021">2021</option>
+    <option value="2020">2020</option>
+    <option value="2019">2019</option>
+    <option value="2018">2018</option>
+    <option value="2017">2017</option>
+    <option value="2016">2016</option>
+    <option value="2015">2015</option>
+    <option value="2014">2014</option>
+    <option value="2013">2013</option>    
+  </select>
+
+  <label for="make_select">Select Make:</label>
+  <select id="make_select" name="make">
+  </select>
+
+  <label for="model_select">Select Model:</label>
+  <select id="model_select" name="model">
+  </select>
+
+  <label for="body_style_select">Select Body Style</label>
+  <select id="body_style_select" name="body_style_select"></select>
+
+  <label for="credit">Credit Score:</label>
+  <select id="credit" name="credit">
+    <option value="excellent">Excellent</option>
+    <option value="good">Good</option>
+    <option value="fair">Fair</option>
+    <option value="poor">Poor</option>
+  </select>
+  <input type="submit" value="Submit">
+</form>
+<h3>Cars 10 years old or older don't qualify</h3>
+<p>Please see what option are available to you here:<button>Options</button></p>
+</div>
+<script type="text/javascript">
+    
+// Get makes
+document.getElementById("year_select").addEventListener("change", async function() {
+  let selectedYear = this.value;
+
+  let response = await fetch("getmakes.php", {
+    method: "POST", 
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `year=${selectedYear}` 
+  });
+
+  let data = await response.json();
+
+  let makeSelect = document.getElementById("make_select");
+  makeSelect.innerHTML = "";
+
+  data.forEach(make => {
+    let option = document.createElement("option");
+    option.value = make;
+    option.text = make;
+    makeSelect.appendChild(option);
+  });
+
+});
+</script>
+<script type="text/javascript">
+// Get models
+document.getElementById("make_select").addEventListener("change", async function() {
+  
+  let selectedMake = this.value;
+  let selectedYear = document.getElementById("year_select").value;
+
+  let response = await fetch("getmodels.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `year=${selectedYear}&make=${selectedMake}`
+  });
+  
+  let data = await response.json();
+
+  let modelSelect = document.getElementById("model_select");
+  modelSelect.innerHTML = "";
+
+  data.forEach(model => {
+    let option = document.createElement("option");
+    option.value = model;
+    option.text = model;
+    modelSelect.appendChild(option);
+  });
+
+});
+</script>
+
+<script type="text/javascript">
+// Get Body Styles
+document.getElementById("model_select").addEventListener("change", async function() {
+
+let selectedModel = this.value;
+let selectedMake = document.getElementById("make_select").value;
+let selectedYear = document.getElementById("year_select").value;
+
+let response = await fetch("gettrims.php", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: `year=${selectedYear}&make=${selectedMake}&model=${selectedModel}` 
+});
+
+let data = await response.json();
+
+let bodyStyleSelect = document.getElementById("body_style_select");
+bodyStyleSelect.innerHTML = "";
+
+data.forEach(style => {
+  let option = document.createElement("option");
+  option.value = style;
+  option.text = style;
+  bodyStyleSelect.appendChild(option);
+});
+
+});
+  </script>
+    
+</body>
+
+
+
+
+
